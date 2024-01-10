@@ -1,26 +1,25 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  ErrorList, Footer, Header, TodoList,
+} from './components';
+import { useTodos } from './context';
 
-function App() {
+export const App: React.FC = () => {
+  const { todos } = useTodos();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="todoapp">
+      <h1 className="todoapp__title">todos</h1>
+
+      <div className="todoapp__content">
+        <Header />
+
+        <TodoList />
+        {todos.length > 0 && <Footer />}
+      </div>
+
+      <ErrorList />
     </div>
   );
-}
-
-export default App;
+};
